@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutti-Tube</title>
+    <link rel="shortcut icon" href="./icono.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+    <div class="logo-container">
+        <img class="logo" src="./icono2.png" alt="Tutti-Tube">
+    </div>
+
+
+    <div class="ruleta-container">
+        <div class="ruleta" id="ruleta">
+            <div class="letra" data-letra="A">A</div>
+            <div class="letra" data-letra="B">B</div>
+            <div class="letra" data-letra="C">C</div>
+            <div class="letra" data-letra="D">D</div>
+            <div class="letra" data-letra="E">E</div>
+            <div class="letra" data-letra="F">F</div>
+            <div class="letra" data-letra="G">G</div>
+            <div class="letra" data-letra="H">H</div>
+            <div class="letra" data-letra="I">I</div>
+            <div class="letra" data-letra="J">J</div>
+            <div class="letra" data-letra="K">K</div>
+            <div class="letra" data-letra="L">L</div>
+            <div class="letra" data-letra="M">M</div>
+            <div class="letra" data-letra="N">N</div>
+            <div class="letra" data-letra="O">O</div>
+            <div class="letra" data-letra="P">P</div>
+            <div class="letra" data-letra="Q">Q</div>
+            <div class="letra" data-letra="R">R</div>
+            <div class="letra" data-letra="S">S</div>
+            <div class="letra" data-letra="T">T</div>
+            <div class="letra" data-letra="U">U</div>
+            <div class="letra" data-letra="V">V</div>
+            <div class="letra" data-letra="W">W</div>
+            <div class="letra" data-letra="X">X</div>
+            <div class="letra" data-letra="Y">Y</div>
+            <div class="letra" data-letra="Z">Z</div>
+        </div>
+
+        <div class="letra-seleccionada" id="letra-seleccionada">?</div>
+    </div>
+
+    <button id="generar-artista">Girar Rueda</button>
+
+    <!-- Tarjetas para Sexo e Idioma -->
+    <div class="card-container">
+        <div class="card" id="card-sexo">
+
+            <p id="sexo">?</p>
+            <!-- Imagen de Arlequín que aparecerá solo si "Arlequín" es seleccionado -->
+            <img id="arlequin-img-sexo" src="./arlequin1.png" alt="Dibujo de Arlequín" style="display: none;">
+        </div>
+        <div class="card" id="card-idioma">
+
+            <p id="idioma">?</p>
+            <!-- Imagen de Arlequín que aparecerá solo si "Arlequín" es seleccionado -->
+            <img id="arlequin-img-idioma" src="./arlequin1.png" alt="Dibujo de Arlequín" style="display: none;">
+        </div>
+    </div>
+
+    <div class="timer-container">
+        <p id="timer">60:00</p>
+    </div>
+
+    <div class="youtube-search">
+        <input type="text" id="youtube-input" placeholder="Busca en YouTube">
+        <button id="youtube-button">Buscar en YouTube</button>
+    </div>
+
+
+    <script defer src="./script.js"></script>
+</body>
+
+</html>

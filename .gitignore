@@ -1,0 +1,5 @@
+.git.backup*/
+gradle_tmp/
+android_app/.gradle/
+android_app/build/
+.gradle/
