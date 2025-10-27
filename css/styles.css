@@ -370,8 +370,8 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    margin-top: 12px;
+    gap: 8px;
+    margin-top: -6px; /* sube el bloque de búsqueda para acercar el botón al temporizador */
     width: 100%;
     max-width: 420px;
     padding: 0 16px;

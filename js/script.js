@@ -156,6 +156,25 @@ document.getElementById('youtube-button').addEventListener('click', function () 
     const query = document.getElementById('youtube-input').value.trim();
     if (!query) return;
 
+    // Diagnostic: detectar qué puente/estrategia se va a usar y mostrar alerta para pruebas
+    try {
+        if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.CastBridge && typeof window.Capacitor.Plugins.CastBridge.sendToTv === 'function') {
+            console.log('[DEBUG] usando: Capacitor.Plugins.CastBridge.sendToTv');
+            try { alert('DEBUG: usando Capacitor CastBridge'); } catch(e){}
+        } else if (window.Android && typeof window.Android.sendToTv === 'function') {
+            console.log('[DEBUG] usando: window.Android.sendToTv');
+            try { alert('DEBUG: usando Android.sendToTv'); } catch(e){}
+        } else if (window.Android && typeof window.Android.openYouTube === 'function') {
+            console.log('[DEBUG] usando: window.Android.openYouTube');
+            try { alert('DEBUG: usando Android.openYouTube'); } catch(e){}
+        } else {
+            console.log('[DEBUG] no se detectó puente nativo, se usará intent/web fallback');
+            try { alert('DEBUG: no se detectó puente nativo, se usará intent/web fallback'); } catch(e){}
+        }
+    } catch(err) {
+        console.log('[DEBUG] error en diagnóstico de puente:', err);
+    }
+
     // 0) Intentar plugin de Capacitor si existe (prioritario en build Android con Capacitor)
     try {
         if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.OpenYouTube && typeof window.Capacitor.Plugins.OpenYouTube.open === 'function') {
