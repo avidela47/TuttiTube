@@ -241,6 +241,8 @@ button:hover {
     transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
     text-transform: uppercase;
     letter-spacing: 0.6px;
+    /* subir un poco el botón según petición */
+    margin-top: -12px;
 }
 
 #generar-artista:hover {
@@ -303,7 +305,7 @@ button:hover {
     display: flex;
     justify-content: space-around;
     /* Espacio entre tarjetas */
-    margin-top: 20px;
+    margin-top: 8px; /* reducido para subir las tarjetas */
     /* Margen superior para separar de otros elementos */
 }
 
@@ -325,7 +327,7 @@ button:hover {
     width: 150px;
     /* Ancho fijo para las tarjetas */
     height: 100px;
-    margin: 10px;
+    margin: 6px; /* reducir margen para acercar al botón */
     position: relative;
     overflow: hidden;
 }
