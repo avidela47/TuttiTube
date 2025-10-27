@@ -1,0 +1,687 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: flex-start; /* mover contenido hacia arriba en lugar de centrar verticalmente */
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh; /* más robusto que height:100% */
+    /* Ocupa toda la altura de la ventana */
+    width: 100%;
+    /* Ocupa todo el ancho de la ventana */
+    margin: 0;
+    /* Elimina cualquier margen */
+    /* Usar imagen de fondo principal */
+    background-image: url(../img/backgrounder.jpg);
+    background-size: cover;
+    /* Ajusta la imagen para cubrir todo el contenedor manteniendo proporciones */
+    background-position: center;
+    /* Centra la imagen en la pantalla */
+    background-repeat: no-repeat;
+    /* Evita la repetición de la imagen */
+    background-attachment: fixed;
+    /* Mantiene la imagen fija al hacer scroll */
+    background-color: #111;
+    /* Color de respaldo oscuro si la imagen no carga */
+    padding-top: 4px; /* ajustar: subir el contenido (menos espacio superior) */
+}
+
+/* Estilo del contenedor del logo */
+.logo-container {
+    display: flex;
+    /* Usa flexbox para alinear elementos */
+    align-items: center;
+    /* Centra verticalmente el logo */
+    justify-content: center;
+    /* Centra horizontalmente el logo */
+    height: 140px;
+    /* Ajusta la altura del contenedor (agrandado para destacar el logo sobre la ruleta) */
+    /* Subir el logo un poco hacia la parte superior */
+    margin-top: -20px;
+}
+
+/* Estilo de la imagen del logo */
+.logo {
+    height: 100%;
+    /* El logo ocupará el 100% de la altura del contenedor */
+    width: auto;
+    /* Mantiene la proporción del logo */
+    max-height: 120px;
+    /* Altura máxima mayor para que el logo sea muy grande en escritorio */
+    transition: transform 0.3s;
+    /* Suaviza el cambio en transformaciones */
+}
+
+/* Efecto al pasar el mouse sobre el logo */
+.logo:hover {
+    transform: scale(1.05);
+    /* Agranda ligeramente el logo al pasar el mouse */
+}
+
+.ruleta-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.ruleta {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: transform 0.8s ease-out;
+    background-image: url(../img/fondoruleta.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.letra {
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    transform-origin: center;
+    transform: rotate(0deg);
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.ruleta .letra:nth-child(1) {
+    transform: rotate(0deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(2) {
+    transform: rotate(13.84deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(3) {
+    transform: rotate(27.69deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(4) {
+    transform: rotate(41.53deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(5) {
+    transform: rotate(55.38deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(6) {
+    transform: rotate(69.23deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(7) {
+    transform: rotate(83.07deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(8) {
+    transform: rotate(96.92deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(9) {
+    transform: rotate(110.76deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(10) {
+    transform: rotate(124.61deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(11) {
+    transform: rotate(138.46deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(12) {
+    transform: rotate(152.30deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(13) {
+    transform: rotate(166.15deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(14) {
+    transform: rotate(180deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(15) {
+    transform: rotate(193.84deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(16) {
+    transform: rotate(207.69deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(17) {
+    transform: rotate(221.53deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(18) {
+    transform: rotate(235.38deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(19) {
+    transform: rotate(249.23deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(20) {
+    transform: rotate(263.07deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(21) {
+    transform: rotate(276.92deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(22) {
+    transform: rotate(290.76deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(23) {
+    transform: rotate(304.61deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(24) {
+    transform: rotate(318.46deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(25) {
+    transform: rotate(332.30deg) translate(130px);
+}
+
+.ruleta .letra:nth-child(26) {
+    transform: rotate(346.15deg) translate(130px);
+}
+
+.flecha {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid rgb(255, 0, 0);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4c00ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.15s ease;
+}
+
+button:hover {
+    background-color: #ffffff;
+    color: #4c00ff;
+}
+
+/* Estilos vistosos para el botón "Girar Rueda" */
+#generar-artista {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8a00 50%, #ffd166 100%);
+    color: #071018;
+    font-weight: 800;
+    padding: 12px 28px;
+    border-radius: 14px;
+    border: none;
+    box-shadow: 0 12px 30px rgba(255,107,107,0.18), inset 0 -4px 8px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+#generar-artista:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(255,107,107,0.24), inset 0 -3px 6px rgba(0,0,0,0.06);
+    filter: brightness(1.02);
+}
+
+#generar-artista:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
+.letra.selected {
+    color: red;
+    /* No parpadea: dejamos la animación sólo para el círculo central para evitar que dos elementos titilen */
+    transform-origin: center center;
+    /* ligero pulso y resplandor para destacar la letra */
+    transition: transform 0.2s ease;
+    text-shadow: 0 0 8px rgba(255,0,0,0.8);
+}
+
+/* Parpadeo aplicado a la letra concreta dentro de la ruleta */
+.letra.blink {
+    animation: blink 0.8s linear infinite;
+    text-shadow: 0 0 10px rgba(255,0,0,0.9);
+}
+
+/* pulso más notorio al estar seleccionada */
+.letra.selected.pulse {
+    transform: scale(1.25);
+}
+
+.letra-seleccionada {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: red;
+    border: 2px solid red;
+    border-radius: 50%;
+    padding: 0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    background: rgba(255,255,255,0.02);
+}
+
+/* Activar parpadeo sólo cuando se añada la clase .blink al elemento central */
+.letra-seleccionada.blink {
+    animation: blink 1s infinite;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    /* Espacio entre tarjetas */
+    margin-top: 20px;
+    /* Margen superior para separar de otros elementos */
+}
+
+.card {
+    /* usar imagen de fondo pero con overlay más sutil para que los contenidos (ej. arlequín) sean visibles */
+    background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.12)), url(../img/fondocard.jpg);
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(255,255,255,0.08);
+    /* Borde de la tarjeta */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    padding: 20px;
+    /* Espaciado interno */
+    text-align: center;
+    /* Centra el texto */
+    width: 150px;
+    /* Ancho fijo para las tarjetas */
+    height: 100px;
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    /* Espaciado inferior del título */
+    font-size: 15px;
+    color: #000000;
+}
+
+.card p {
+    font-size: 18px;
+    /* Tamaño del texto del párrafo */
+    font-weight: bold;
+    /* Negrita para el texto */
+    color: #000000;
+}
+
+.timer-container {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+#timer {
+    font-weight: bold;
+    border: solid 2px rgb(255, 255, 255);
+    border-radius: 8px;
+    margin-top: -20px;
+}
+
+p {
+    color: white;
+    margin-top: 10px;
+}
+
+.timer-red {
+    color: red;
+    animation: blink 1s infinite;
+}
+
+/* Banner que aparece cuando el temporizador llega a cero */
+.end-banner{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.96);
+    padding: 12px 22px;
+    border-radius: 12px;
+    color: #071018;
+    font-weight: 800;
+    z-index: 9999;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    background: linear-gradient(90deg, #ff6b6b 0%, #ff8a00 50%, #ffd166 100%);
+    opacity: 0;
+    transition: transform 0.28s cubic-bezier(.2,.9,.3,1), opacity 0.28s ease;
+}
+.end-banner.show{
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+/* Banner variante cuando se coloca debajo del input (móvil) */
+.end-banner.below {
+    /* transform ajustado para que el banner no se desplace verticalmente */
+    transform: translateX(-50%) translateY(0) scale(0.96);
+}
+.end-banner.below.show {
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 1;
+}
+
+@media (max-width:480px){
+    .end-banner{ top: 12px; padding:8px 12px; font-size:14px; white-space:nowrap; max-width:95%; }
+    .end-banner.below{ left: 50% !important; }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+#arlequin-img-idioma,
+#arlequin-img-sexo {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 80%;
+    /* aumentado para mostrar el Arlequín más grande sin cambiar la tarjeta */
+    max-height: 88px;
+    margin: 8px auto 0;
+    object-fit: contain;
+    /* Añadir un fondo claro y padding para que el dibujo oscuro resalte sobre tarjetas oscuras */
+    background: rgba(255,255,255,0.06);
+    padding: 6px;
+    border-radius: 6px;
+    /* Sutil sombra para separarlo del fondo */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.35);
+}
+
+.youtube-search {
+    margin-top: 5px;
+    text-align: center;
+}
+
+#youtube-input {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+#youtube-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#youtube-button:hover {
+    background-color: #cc0000;
+}
+
+
+/* Media Queries para adaptación */
+@media (max-width: 768px) {
+    .ruleta-container {
+        width: 250px;
+        height: 250px;
+    }
+
+    .letra-seleccionada {
+        width: 100px;
+        height: 100px;
+        font-size: 36px;
+    }
+    /* Ajustes para las imágenes de Arlequín en tablet */
+    #arlequin-img-idioma,
+    #arlequin-img-sexo {
+        /* posicionar centrado y permitir mayor tamaño visual sin modificar la tarjeta */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-height: 90%;
+        width: auto;
+        max-width: 90%;
+        margin: 0;
+    }
+
+    .card {
+        width: 120px;
+        height: 80px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    #generar-artista {
+        padding: 10px 22px;
+        font-size: 14px;
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        flex-direction: column;
+        /* Asegura que los elementos se apilen verticalmente */
+        padding: 10px;
+        /* Agrega un poco de espaciado */
+        padding-top: 6px; /* reducir el empuje en móvil para que no quede demasiado arriba */
+    }
+
+    /* En móvil hacemos el logo MUCHO más grande según pedido */
+    .logo-container {
+        height: 180px; /* mucho más alto en móviles */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* En móvil subimos el logo un poco menos para evitar overlap */
+    .logo-container {
+        margin-top: -20px; /* sube más el logo en móvil según pedido */
+    }
+
+    .logo {
+        max-height: 160px; /* logo muy grande en móvil */
+        width: auto;
+    }
+
+    .ruleta-container {
+        width: 200px;
+        height: 200px;
+        /* Forzar relación 1:1 para evitar que la ruleta quede ovalada en algunos móviles */
+        aspect-ratio: 1 / 1;
+    }
+
+    /* Asegurar la relación de aspecto también en el propio elemento ruleta */
+    .ruleta {
+        aspect-ratio: 1 / 1;
+    }
+
+    .letra-seleccionada {
+        width: 80px;
+        height: 80px;
+        font-size: 30px;
+    }
+    /* Ajustes para las imágenes de Arlequín en móviles: centrado absoluto y mayor tamaño visual */
+    #arlequin-img-idioma,
+    #arlequin-img-sexo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-height: 95%;
+        width: auto;
+        max-width: 95%;
+        margin: 0;
+    }
+
+    .card {
+        width: 100px;
+        height: 60px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    #generar-artista {
+        padding: 8px 16px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    body {
+        flex-direction: column;
+        padding: 20px;
+        background-size: 100% 100%;
+        /* Ajusta la imagen para cubrir el fondo en pantallas más pequeñas */
+    }
+
+    .logo-container {
+        height: 50px;
+        /* Ajusta la altura del contenedor en pantallas pequeñas */
+    }
+
+    .logo {
+        max-height: 40px;
+        /* Reduce el tamaño del logo */
+    }
+
+    .ruleta-container {
+        width: 300px;
+        /* Reduce el tamaño de la ruleta */
+        height: 300px;
+        margin-top: 10px;
+    }
+
+    .ruleta .letra {
+        font-size: 16px;
+        /* Reduce el tamaño de las letras en la ruleta */
+    }
+
+    .flecha {
+        top: 30px;
+        /* Ajusta la posición de la flecha */
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 20px solid rgb(255, 0, 0);
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 14px;
+        /* Reduce el tamaño del botón */
+        margin-top: 15px;
+    }
+
+    .card-container {
+        flex-direction: row;
+        /* Cambia el diseño a columna para que las tarjetas se apilen */
+        align-items: center;
+    }
+
+    .card {
+        width: 100px;
+        /* Reduce el ancho de las tarjetas */
+        height: 80px;
+        /* Reduce la altura de las tarjetas */
+        padding: 10px;
+        /* Reduce el padding */
+    }
+
+    .card h3 {
+        font-size: 15px;
+        /* Reduce el tamaño del texto del título */
+        color: #000000;
+    }
+
+    .card p {
+        font-size: 18px;
+        /* Reduce el tamaño del texto del párrafo */
+        color: #000000;
+    }
+
+    p {
+        color: rgb(255, 255, 255);
+    }
+
+    #timer {
+        font-weight: bold;
+        border: solid 2px rgb(255, 255, 255);
+        border-radius: 8px;
+        margin-top: -20px;
+    }
+}
+
+/* Reglas finales para asegurar logo grande en móviles (anulan reglas previas para <=900px) */
+@media (max-width: 480px) {
+    .logo-container {
+        height: 180px;
+    }
+    .logo {
+        max-height: 160px;
+        width: auto;
+    }
+}
+
+/* --- Override final: ocultar scroll vertical según pedido del usuario --- */
+html, body {
+    overflow-y: hidden; /* elimina scrollbar vertical */
+    height: 100%;
+}
+
+/* Ocultar scrollbar para navegadores que lo soportan (estético) */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}

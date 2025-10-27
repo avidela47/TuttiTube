@@ -156,8 +156,31 @@ document.getElementById('youtube-button').addEventListener('click', function () 
     const query = document.getElementById('youtube-input').value.trim();
     if (!query) return;
 
+    // 0) Intentar plugin de Capacitor si existe (prioritario en build Android con Capacitor)
+    try {
+        if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.OpenYouTube && typeof window.Capacitor.Plugins.OpenYouTube.open === 'function') {
+            // El plugin debe implementar open({ query: string })
+            window.Capacitor.Plugins.OpenYouTube.open({ query: query });
+            return;
+        }
+    } catch (e) {
+        // ignore y seguimos a los fallbacks
+    }
+
     // 1) Prefer native bridge: Android.openYouTube(query)
     try {
+        // First, if running inside Capacitor, try the CastBridge plugin
+        try {
+            if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.CastBridge && typeof window.Capacitor.Plugins.CastBridge.sendToTv === 'function') {
+                window.Capacitor.Plugins.CastBridge.sendToTv({ query: query });
+                return;
+            }
+        } catch (e) { /* ignore */ }
+
+        // Next, if a WebView-exposed Android bridge has sendToTv, try it
+        if (window.Android && typeof window.Android.sendToTv === 'function') {
+            try { window.Android.sendToTv(query); return; } catch(e) { /* ignore and fallback */ }
+        }
         if (window.Android && typeof window.Android.openYouTube === 'function') {
             window.Android.openYouTube(query);
             return;
@@ -189,6 +212,4 @@ document.getElementById('youtube-button').addEventListener('click', function () 
     // 3) Final fallback: open web search
     window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(query), '_blank');
 });
-
-
 

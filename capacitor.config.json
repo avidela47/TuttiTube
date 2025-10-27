@@ -1,0 +1,12 @@
+{
+  "appId": "com.tuttitube.app",
+  "appName": "TuttiTube",
+  "webDir": "www",
+  "server": {
+    "url": "https://tutti-tube.vercel.app",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}
