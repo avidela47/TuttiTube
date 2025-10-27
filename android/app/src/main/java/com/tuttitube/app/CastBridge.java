@@ -8,9 +8,9 @@ import android.widget.Toast;
 
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.JSObject;
-import com.getcapacitor.PluginMethod;
-import com.getcapacitor.Capacitor;
 import com.getcapacitor.Plugin;
+import com.getcapacitor.annotation.CapacitorPlugin;
+import com.getcapacitor.PluginMethod;
 
 import androidx.annotation.NonNull;
 
@@ -24,7 +24,7 @@ import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaLoadRequestData;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 
-@Plugin(name = "CastBridge")
+@CapacitorPlugin(name = "CastBridge")
 public class CastBridge extends Plugin {
 
     @PluginMethod
