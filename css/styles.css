@@ -242,7 +242,7 @@ button:hover {
     text-transform: uppercase;
     letter-spacing: 0.6px;
     /* subir un poco el botón según petición */
-    margin-top: -12px;
+    margin-top: -24px; /* ajustado: subir un poco más */
 }
 
 #generar-artista:hover {
@@ -569,7 +569,7 @@ p {
 
     /* En móvil subimos el logo un poco menos para evitar overlap */
     .logo-container {
-        margin-top: -20px; /* sube más el logo en móvil según pedido */
+        margin-top: -30px; /* sube un poco más el logo en móvil según pedido */
     }
 
     .logo {
