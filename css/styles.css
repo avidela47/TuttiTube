@@ -41,7 +41,7 @@ body {
     height: 140px;
     /* Ajusta la altura del contenedor (agrandado para destacar el logo sobre la ruleta) */
     /* Subir el logo un poco hacia la parte superior */
-    margin-top: -20px;
+    margin-top: -40px;
 }
 
 /* Estilo de la imagen del logo */
@@ -725,7 +725,7 @@ p {
     }
 
     /* Slight upward nudge for the roulette when showing alone (increased) */
-    .ruleta-container { transform: translateY(-30px); }
+    .ruleta-container { transform: translateY(-40px); }
 }
 
 /* Reglas finales para asegurar logo grande en móviles (anulan reglas previas para <=900px) */
