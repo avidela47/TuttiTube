@@ -67,7 +67,7 @@ body {
     width: 360px;
     height: 360px;
     margin-bottom: 6px;
-    margin-top: 6px;
+    margin-top: -6px; /* ajustado: subir la ruleta un poco */
 }
 
 .ruleta {
@@ -510,10 +510,11 @@ p {
 /* Media Queries para adaptación */
 @media (max-width: 768px) {
     .ruleta-container {
-        width: 250px;
-        height: 250px;
+        width: 300px;
+        /* Reduce el tamaño de la ruleta */
+        height: 300px;
+        margin-top: 0px; /* ajustado: reducir margen superior en pantallas pequeñas */
     }
-
     .letra-seleccionada {
         width: 100px;
         height: 100px;
@@ -569,7 +570,7 @@ p {
 
     /* En móvil subimos el logo un poco menos para evitar overlap */
     .logo-container {
-        margin-top: -30px; /* sube un poco más el logo en móvil según pedido */
+        margin-top: -40px; /* sube un poco más el logo en móvil según pedido */
     }
 
     .logo {

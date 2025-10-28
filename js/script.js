@@ -153,82 +153,10 @@ function hideEndBanner(){
 }
 
 document.getElementById('youtube-button').addEventListener('click', function () {
-    const query = document.getElementById('youtube-input').value.trim();
-    if (!query) return;
-
-    // Diagnostic: detectar qué puente/estrategia se va a usar y mostrar alerta para pruebas
-    try {
-        if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.CastBridge && typeof window.Capacitor.Plugins.CastBridge.sendToTv === 'function') {
-            console.log('[DEBUG] usando: Capacitor.Plugins.CastBridge.sendToTv');
-            try { alert('DEBUG: usando Capacitor CastBridge'); } catch(e){}
-        } else if (window.Android && typeof window.Android.sendToTv === 'function') {
-            console.log('[DEBUG] usando: window.Android.sendToTv');
-            try { alert('DEBUG: usando Android.sendToTv'); } catch(e){}
-        } else if (window.Android && typeof window.Android.openYouTube === 'function') {
-            console.log('[DEBUG] usando: window.Android.openYouTube');
-            try { alert('DEBUG: usando Android.openYouTube'); } catch(e){}
-        } else {
-            console.log('[DEBUG] no se detectó puente nativo, se usará intent/web fallback');
-            try { alert('DEBUG: no se detectó puente nativo, se usará intent/web fallback'); } catch(e){}
-        }
-    } catch(err) {
-        console.log('[DEBUG] error en diagnóstico de puente:', err);
+    const query = document.getElementById('youtube-input').value;
+    if (query) {
+        const youtubeUrl = `https://youtube.com/results?search_query=${encodeURIComponent(query)}`;
+        window.location.href = youtubeUrl; // Redirige a la app de YouTube
     }
-
-    // 0) Intentar plugin de Capacitor si existe (prioritario en build Android con Capacitor)
-    try {
-        if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.OpenYouTube && typeof window.Capacitor.Plugins.OpenYouTube.open === 'function') {
-            // El plugin debe implementar open({ query: string })
-            window.Capacitor.Plugins.OpenYouTube.open({ query: query });
-            return;
-        }
-    } catch (e) {
-        // ignore y seguimos a los fallbacks
-    }
-
-    // 1) Prefer native bridge: Android.openYouTube(query)
-    try {
-        // First, if running inside Capacitor, try the CastBridge plugin
-        try {
-            if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.CastBridge && typeof window.Capacitor.Plugins.CastBridge.sendToTv === 'function') {
-                window.Capacitor.Plugins.CastBridge.sendToTv({ query: query });
-                return;
-            }
-        } catch (e) { /* ignore */ }
-
-        // Next, if a WebView-exposed Android bridge has sendToTv, try it
-        if (window.Android && typeof window.Android.sendToTv === 'function') {
-            try { window.Android.sendToTv(query); return; } catch(e) { /* ignore and fallback */ }
-        }
-        if (window.Android && typeof window.Android.openYouTube === 'function') {
-            window.Android.openYouTube(query);
-            return;
-        }
-    } catch (e) {
-        // ignore and fallback
-    }
-
-    // 2) Try Android intent URL to open YouTube app (works on many Android devices)
-    try {
-        // vnd.youtube search scheme or intent URL as fallback
-        const vnd = 'vnd.youtube:search?query=' + encodeURIComponent(query);
-        const intentUrl = 'intent://results?search_query=' + encodeURIComponent(query) + '#Intent;scheme=https;package=com.google.android.youtube;end';
-        // Try vnd scheme first
-        window.location.href = vnd;
-        // After a short delay, try intent URL then web as last resort
-        setTimeout(() => {
-            window.location.href = intentUrl;
-        }, 300);
-        // As last fallback, open web search
-        setTimeout(() => {
-            window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(query), '_blank');
-        }, 800);
-        return;
-    } catch (err) {
-        // ignore and fallback to web
-    }
-
-    // 3) Final fallback: open web search
-    window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(query), '_blank');
 });
 
