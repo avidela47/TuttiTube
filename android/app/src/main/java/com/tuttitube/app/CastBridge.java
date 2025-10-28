@@ -23,6 +23,12 @@ import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaLoadRequestData;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @CapacitorPlugin(name = "CastBridge")
 public class CastBridge extends Plugin {
@@ -42,16 +48,23 @@ public class CastBridge extends Plugin {
             SessionManager sessionManager = castContext.getSessionManager();
             CastSession session = (CastSession) sessionManager.getCurrentCastSession();
             if (session != null && session.isConnected()) {
-                // Best-effort: load a YouTube search URL as web content on the receiver
-                String url = "https://www.youtube.com/results?search_query=" + Uri.encode(query);
-                MediaInfo mediaInfo = new MediaInfo.Builder(url)
-                        .setContentType("text/html")
-                        .build();
-                RemoteMediaClient remoteMediaClient = session.getRemoteMediaClient();
-                if (remoteMediaClient != null) {
-                    remoteMediaClient.load(new MediaLoadRequestData.Builder().setMediaInfo(mediaInfo).build());
-                    call.resolve();
-                    return;
+                // Try to find the first YouTube video for the query and load it on the receiver
+                try {
+                    String videoId = fetchFirstYouTubeVideoId(query);
+                    if (videoId != null) {
+                        String videoUrl = "https://www.youtube.com/watch?v=" + videoId;
+                        MediaInfo mediaInfo = new MediaInfo.Builder(videoUrl)
+                                .setContentType("video/*")
+                                .build();
+                        RemoteMediaClient remoteMediaClient = session.getRemoteMediaClient();
+                        if (remoteMediaClient != null) {
+                            remoteMediaClient.load(new MediaLoadRequestData.Builder().setMediaInfo(mediaInfo).build());
+                            call.resolve();
+                            return;
+                        }
+                    }
+                } catch (Exception e) {
+                    // fallback to original web load below
                 }
             }
         } catch (Exception e) {
@@ -74,5 +87,36 @@ public class CastBridge extends Plugin {
             call.resolve();
             return;
         }
+    }
+
+    // Simple HTTP fetch to extract the first video id from YouTube search results page.
+    // Best-effort: no API key required.
+    private String fetchFirstYouTubeVideoId(String query) {
+        HttpURLConnection conn = null;
+        BufferedReader reader = null;
+        try {
+            String urlStr = "https://www.youtube.com/results?search_query=" + java.net.URLEncoder.encode(query, "UTF-8");
+            URL url = new URL(urlStr);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Android)" );
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+            reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            String line;
+            Pattern p = Pattern.compile("watch\\?v=([\\w-]{11})");
+            while ((line = reader.readLine()) != null) {
+                Matcher m = p.matcher(line);
+                if (m.find()) {
+                    return m.group(1);
+                }
+            }
+        } catch (Exception e) {
+            // ignore
+        } finally {
+            try { if (reader != null) reader.close(); } catch (Exception ignored) {}
+            if (conn != null) conn.disconnect();
+        }
+        return null;
     }
 }

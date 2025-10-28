@@ -156,6 +156,33 @@ document.getElementById('youtube-button').addEventListener('click', function () 
     const query = document.getElementById('youtube-input').value;
     if (query) {
         const youtubeUrl = `https://youtube.com/results?search_query=${encodeURIComponent(query)}`;
+
+        // Intentar enviar la búsqueda al TV si existe el bridge nativo
+        try {
+            if (window.Android && typeof window.Android.sendToTv === 'function') {
+                window.Android.sendToTv(query);
+                return;
+            }
+        } catch (e) {
+            // continuar al siguiente fallback
+        }
+
+        // Si estamos en Capacitor, usar el plugin CastBridge si está disponible
+        try {
+            if (window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.CastBridge && Capacitor.Plugins.CastBridge.sendToTv) {
+                Capacitor.Plugins.CastBridge.sendToTv({ query: query }).then(() => {
+                    // resuelto por el plugin
+                }).catch(() => {
+                    // fallback a abrir YouTube en web
+                    window.location.href = youtubeUrl;
+                });
+                return;
+            }
+        } catch (e) {
+            // ignore
+        }
+
+        // Último recurso: abrir YouTube en web (o app si está instalada)
         window.location.href = youtubeUrl; // Redirige a la app de YouTube
     }
 });
