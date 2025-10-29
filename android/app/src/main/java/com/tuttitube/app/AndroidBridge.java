@@ -7,12 +7,7 @@ import android.net.Uri;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
-import com.google.android.gms.cast.framework.CastContext;
-import com.google.android.gms.cast.framework.CastSession;
-import com.google.android.gms.cast.framework.SessionManager;
-import com.google.android.gms.cast.MediaInfo;
-import com.google.android.gms.cast.MediaLoadRequestData;
-import com.google.android.gms.cast.framework.media.RemoteMediaClient;
+// Cast framework references removed to avoid automatic Cast behavior.
 
 /**
  * Expose simple methods to JS under the name `Android` so existing JS code that calls
@@ -47,39 +42,11 @@ public class AndroidBridge {
 
     @JavascriptInterface
     public void sendToTv(String query) {
+        // Funcionalidad de "Enviar a TV" deshabilitada. No se abrirán ajustes ni navegadores.
         try {
-            Context ctx = activity.getApplicationContext();
-            CastContext castContext = CastContext.getSharedInstance(ctx);
-            SessionManager sessionManager = castContext.getSessionManager();
-            CastSession session = (CastSession) sessionManager.getCurrentCastSession();
-            if (session != null && session.isConnected()) {
-                String url = "https://www.youtube.com/results?search_query=" + Uri.encode(query);
-                MediaInfo mediaInfo = new MediaInfo.Builder(url)
-                        .setContentType("text/html")
-                        .build();
-                RemoteMediaClient remoteMediaClient = session.getRemoteMediaClient();
-                if (remoteMediaClient != null) {
-                    remoteMediaClient.load(new MediaLoadRequestData.Builder().setMediaInfo(mediaInfo).build());
-                    return;
-                }
-            }
-        } catch (Exception e) {
-            // ignore and fallback
-        }
-
-        try {
-            Intent intent = new Intent("android.settings.CAST_SETTINGS");
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            activity.startActivity(intent);
-            Toast.makeText(activity, "Seleccioná un dispositivo Cast y luego vuelve a intentar.", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, "Funcionalidad 'Enviar a TV' no disponible.", Toast.LENGTH_SHORT).show();
         } catch (Exception ex) {
-            try {
-                Intent web = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + Uri.encode(query)));
-                web.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(web);
-            } catch (Exception exc) {
-                // ignore
-            }
+            // ignore
         }
     }
 }

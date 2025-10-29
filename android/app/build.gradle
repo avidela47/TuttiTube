@@ -40,8 +40,9 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
-    // Google Cast framework - required to discover/send to Cast receivers (Smart TVs)
-    implementation 'com.google.android.gms:play-services-cast-framework:21.1.0'
+    // Google Cast framework removed for now - it was triggering the system Cast dialog.
+    // If you want Cast support re-enable this dependency deliberately.
+    // implementation 'com.google.android.gms:play-services-cast-framework:21.1.0'
 }
 
 apply from: 'capacitor.build.gradle'

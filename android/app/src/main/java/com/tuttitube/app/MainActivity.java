@@ -2,7 +2,7 @@ package com.tuttitube.app;
 
 import com.getcapacitor.BridgeActivity;
 import android.os.Bundle;
-import com.google.android.gms.cast.framework.CastContext;
+// Cast framework removed to avoid opening system Cast UI automatically during app startup
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +12,8 @@ public class MainActivity extends BridgeActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		try {
-			// Initialize Cast context (best effort). Requires play-services-cast-framework in dependencies.
-			CastContext.getSharedInstance(this);
-		} catch (Exception e) {
-			Log.w("CastInit", "CastContext init failed: " + e.getMessage());
-		}
+		// Cast initialization intentionally disabled to prevent automatic Cast dialogs.
+		// If you need Cast support, re-enable the dependency and initialization deliberately.
 
 		// Buscar el WebView en la jerarquía de vistas y añadir la interfaz JavaScript 'Android'
 		try {
